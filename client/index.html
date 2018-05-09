@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>clojure jwt client</title>
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>        
+    </head>
+    <body>
+
+        <label>user : <input value="u4bi"></label>
+        <label>accesskey : <input value="token-asccesskey-u4bi"></label>
+            <button onclick="sign()">토큰 발급</button>
+
+        <p></p>
+
+        <label>verify : <input></label>
+            <button onclick="verify()" >토큰 인증</button>
+
+
+        <script>
+
+            let url = 'http://localhost:3000',
+                [ user, accesskey, token ] = document.querySelectorAll('input'),
+                log = (e) => [console.log(e), alert( JSON.stringify(e))];
+
+
+            function sign( data = { user : user.value, accesskey  : accesskey.value }) {
+                axios({
+                    method : 'POST',
+                    url : url + '/sign',
+                    data: data
+                }).then(e => [ log(e.data), token.value = e.data.token || '', document.querySelector('p').innerText = e.data.token || '']);
+            }
+
+
+            function verify(e = token.value) {
+                axios({
+                    method : 'POST',
+                    url : url + '/verify/' + e,
+                }).then(e => log(e.data));
+            }
+
+        </script>
+    </body>
+</html>
