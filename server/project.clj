@@ -5,6 +5,7 @@
                  [ring/ring-jetty-adapter "1.6.3"]
                  [compojure "1.6.1"]
                  [ring/ring-json "0.4.0"]
-                 [ring-cors "0.1.12"]]
+                 [ring-cors "0.1.12"]
+                 [clj-jwt "0.1.1"]]
   :plugins [[lein-ring "0.12.4"]]
   :ring {:handler c-jwt.core/app})
